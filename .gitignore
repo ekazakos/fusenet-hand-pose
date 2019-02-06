@@ -1,3 +1,4 @@
 *.pyc
 *.err*
 *.o*
+.DS_Store
