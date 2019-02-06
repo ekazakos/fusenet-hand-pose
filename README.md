@@ -1,4 +1,4 @@
-##  On the Fusion of RGB and Depth Information for Hand Pose Estimation
+##  Two-stream convolutional networks for fusing RGB and depth images for hand pose estimation using Lasagne
 
 This is an implementation of the paper [On the Fusion of RGB and Depth Information for Hand Pose Estimation](https://ieeexplore.ieee.org/document/8451022). The code is written in python
 using the [Lasagne](https://lasagne.readthedocs.io/en/latest/) DL framework.
