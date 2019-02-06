@@ -1,0 +1,23 @@
+Currently Loaded Modulefiles:
+  1) cmake/3.0.2(default)         7) sqlite/3080803
+  2) bbcp/14.09                   8) intelmpi/5.1.1(default)
+  3) intellib/ics-2016(default)   9) hdf5/1.8.17
+  4) openmpi/1.8.3(default)      10) netcdf/4.3.2(default)
+  5) firefox/31                  11) cuda-toolkit/7.5-cudnn-5.1
+  6) gnutools/2014               12) python/2.7-gcc
+WARNING (theano.sandbox.cuda): The cuda backend is deprecated and will be removed in the next release (v0.10).  Please switch to the gpuarray backend. You can get more information about how to switch at this URL:
+ https://github.com/Theano/Theano/wiki/Converting-to-the-new-gpu-back-end%28gpuarray%29
+
+Using gpu device 0: Tesla K40m (CNMeM is disabled, cuDNN 5110)
+/project/cacds/apps/python/2.7-gcc/lib/python2.7/site-packages/sklearn/cross_validation.py:44: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
+  "This module will be removed in 0.20.", DeprecationWarning)
+Traceback (most recent call last):
+  File "/home/ekazakos/lasagne/hand_pose_estimation/training_script.py", line 75, in <module>
+    shuffle=args.shuffle)
+  File "/home/ekazakos/lasagne/hand_pose_estimation/trainingtesting.py", line 498, in train_fused
+    idx_train, idx_val = load_dsets_trainval('./train_test_splits/nyu_split.npz')
+  File "/home/ekazakos/lasagne/hand_pose_estimation/splitdatasets.py", line 46, in load_dsets_trainval
+    npzfile = np.load(train_val_dir)
+  File "/project/cacds/apps/python/2.7-gcc/lib/python2.7/site-packages/numpy/lib/npyio.py", line 370, in load
+    fid = open(file, "rb")
+IOError: [Errno 2] No such file or directory: './train_test_splits/nyu_split.npz'

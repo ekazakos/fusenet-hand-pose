@@ -1,0 +1,20 @@
+#!/bin/bash
+#SBATCH -t 24:00:00
+#SBATCH -N 1 -n 20
+#SBATCH -J nyufusingconcat4
+#SBATCH -o nyufusingconcat4.o%j
+#SBATCH -e nyufusingconcat4.err%j
+#SBATCH --mail-user=kazakosv90@gmail.com
+#SBATCH --mail-type=all
+#SBATCH --mem 23999
+#SBATCH -p gpu
+
+module add cuda-toolkit/7.0.4 python/2.7-gcc
+source ~/python_apps/env/bin/activate
+module list
+
+hostname
+mpdboot
+python ~/lasagne/hand_pose_estimation/training_script.py 4 fusing 4 concat --predef_hp --validate --save_model  --save_loss --early_stopping --shuffle
+mpdallexit
+deactivate

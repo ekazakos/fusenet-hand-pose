@@ -1,0 +1,206 @@
+compute-0-41.local
+Building the ConvNet...
+
+Loading weights from models/NYU/score_fusing/local/0.050000/weights.npz...
+
+Setting the weights to the model...
+
+Compiling theano functions...
+
+Training started...
+
+Epoch: 1. Completion time:1068.989 
+Train loss: 0.00181		Validation loss:0.00219		                Ratio(Val/Train): 1.20541
+-------------------------------------------------------------------------------------------
+Epoch: 2. Completion time:688.755 
+Train loss: 0.00183		Validation loss:0.00220		                Ratio(Val/Train): 1.20434
+-------------------------------------------------------------------------------------------
+Epoch: 3. Completion time:689.079 
+Train loss: 0.00182		Validation loss:0.00218		                Ratio(Val/Train): 1.19752
+-------------------------------------------------------------------------------------------
+Epoch: 4. Completion time:688.329 
+Train loss: 0.00182		Validation loss:0.00218		                Ratio(Val/Train): 1.19696
+-------------------------------------------------------------------------------------------
+Epoch: 5. Completion time:689.348 
+Train loss: 0.00181		Validation loss:0.00216		                Ratio(Val/Train): 1.19101
+-------------------------------------------------------------------------------------------
+Epoch: 6. Completion time:687.901 
+Train loss: 0.00181		Validation loss:0.00213		                Ratio(Val/Train): 1.17717
+-------------------------------------------------------------------------------------------
+Epoch: 7. Completion time:689.235 
+Train loss: 0.00181		Validation loss:0.00217		                Ratio(Val/Train): 1.20305
+-------------------------------------------------------------------------------------------
+Epoch: 8. Completion time:687.877 
+Train loss: 0.00180		Validation loss:0.00220		                Ratio(Val/Train): 1.22221
+-------------------------------------------------------------------------------------------
+Epoch: 9. Completion time:689.327 
+Train loss: 0.00179		Validation loss:0.00218		                Ratio(Val/Train): 1.21386
+-------------------------------------------------------------------------------------------
+Epoch: 10. Completion time:689.240 
+Train loss: 0.00180		Validation loss:0.00215		                Ratio(Val/Train): 1.19973
+-------------------------------------------------------------------------------------------
+Epoch: 11. Completion time:689.706 
+Train loss: 0.00179		Validation loss:0.00214		                Ratio(Val/Train): 1.19379
+-------------------------------------------------------------------------------------------
+Epoch: 12. Completion time:690.003 
+Train loss: 0.00179		Validation loss:0.00219		                Ratio(Val/Train): 1.22159
+-------------------------------------------------------------------------------------------
+Epoch: 6. Completion time:689.725 
+Train loss: 0.00176		Validation loss:0.00214		                Ratio(Val/Train): 1.21712
+-------------------------------------------------------------------------------------------
+Epoch: 7. Completion time:689.620 
+Train loss: 0.00174		Validation loss:0.00212		                Ratio(Val/Train): 1.22178
+-------------------------------------------------------------------------------------------
+Epoch: 8. Completion time:688.718 
+Train loss: 0.00173		Validation loss:0.00211		                Ratio(Val/Train): 1.21876
+-------------------------------------------------------------------------------------------
+Epoch: 9. Completion time:689.897 
+Train loss: 0.00172		Validation loss:0.00209		                Ratio(Val/Train): 1.21011
+-------------------------------------------------------------------------------------------
+Epoch: 10. Completion time:689.172 
+Train loss: 0.00172		Validation loss:0.00211		                Ratio(Val/Train): 1.22351
+-------------------------------------------------------------------------------------------
+Epoch: 11. Completion time:689.992 
+Train loss: 0.00172		Validation loss:0.00211		                Ratio(Val/Train): 1.22724
+-------------------------------------------------------------------------------------------
+Epoch: 12. Completion time:688.724 
+Train loss: 0.00172		Validation loss:0.00211		                Ratio(Val/Train): 1.23008
+-------------------------------------------------------------------------------------------
+Epoch: 13. Completion time:689.276 
+Train loss: 0.00171		Validation loss:0.00209		                Ratio(Val/Train): 1.22261
+-------------------------------------------------------------------------------------------
+Epoch: 14. Completion time:688.556 
+Train loss: 0.00171		Validation loss:0.00210		                Ratio(Val/Train): 1.22744
+-------------------------------------------------------------------------------------------
+Epoch: 15. Completion time:690.166 
+Train loss: 0.00171		Validation loss:0.00207		                Ratio(Val/Train): 1.20968
+-------------------------------------------------------------------------------------------
+Epoch: 16. Completion time:690.913 
+Train loss: 0.00171		Validation loss:0.00209		                Ratio(Val/Train): 1.22312
+-------------------------------------------------------------------------------------------
+Epoch: 17. Completion time:689.290 
+Train loss: 0.00171		Validation loss:0.00211		                Ratio(Val/Train): 1.23567
+-------------------------------------------------------------------------------------------
+Epoch: 18. Completion time:689.925 
+Train loss: 0.00170		Validation loss:0.00209		                Ratio(Val/Train): 1.23041
+-------------------------------------------------------------------------------------------
+Epoch: 19. Completion time:690.123 
+Train loss: 0.00170		Validation loss:0.00213		                Ratio(Val/Train): 1.25746
+-------------------------------------------------------------------------------------------
+Epoch: 20. Completion time:691.104 
+Train loss: 0.00170		Validation loss:0.00211		                Ratio(Val/Train): 1.24339
+-------------------------------------------------------------------------------------------
+Epoch: 21. Completion time:689.809 
+Train loss: 0.00169		Validation loss:0.00212		                Ratio(Val/Train): 1.24973
+-------------------------------------------------------------------------------------------
+Epoch: 15. Completion time:690.432 
+Train loss: 0.00168		Validation loss:0.00210		                Ratio(Val/Train): 1.24771
+-------------------------------------------------------------------------------------------
+Epoch: 16. Completion time:690.471 
+Train loss: 0.00167		Validation loss:0.00208		                Ratio(Val/Train): 1.24122
+-------------------------------------------------------------------------------------------
+Epoch: 17. Completion time:689.815 
+Train loss: 0.00167		Validation loss:0.00208		                Ratio(Val/Train): 1.24581
+-------------------------------------------------------------------------------------------
+Epoch: 18. Completion time:688.899 
+Train loss: 0.00167		Validation loss:0.00207		                Ratio(Val/Train): 1.24440
+-------------------------------------------------------------------------------------------
+Epoch: 19. Completion time:690.488 
+Train loss: 0.00167		Validation loss:0.00206		                Ratio(Val/Train): 1.23615
+-------------------------------------------------------------------------------------------
+Epoch: 20. Completion time:689.500 
+Train loss: 0.00167		Validation loss:0.00205		                Ratio(Val/Train): 1.23246
+-------------------------------------------------------------------------------------------
+Epoch: 21. Completion time:689.283 
+Train loss: 0.00166		Validation loss:0.00207		                Ratio(Val/Train): 1.24311
+-------------------------------------------------------------------------------------------
+Epoch: 22. Completion time:690.629 
+Train loss: 0.00166		Validation loss:0.00205		                Ratio(Val/Train): 1.23672
+-------------------------------------------------------------------------------------------
+Epoch: 23. Completion time:689.608 
+Train loss: 0.00166		Validation loss:0.00204		                Ratio(Val/Train): 1.22803
+-------------------------------------------------------------------------------------------
+Epoch: 24. Completion time:691.072 
+Train loss: 0.00166		Validation loss:0.00207		                Ratio(Val/Train): 1.24750
+-------------------------------------------------------------------------------------------
+Epoch: 25. Completion time:690.167 
+Train loss: 0.00166		Validation loss:0.00206		                Ratio(Val/Train): 1.24519
+-------------------------------------------------------------------------------------------
+Epoch: 26. Completion time:690.759 
+Train loss: 0.00165		Validation loss:0.00205		                Ratio(Val/Train): 1.24192
+-------------------------------------------------------------------------------------------
+Epoch: 27. Completion time:690.267 
+Train loss: 0.00166		Validation loss:0.00205		                Ratio(Val/Train): 1.23956
+-------------------------------------------------------------------------------------------
+Epoch: 28. Completion time:691.672 
+Train loss: 0.00165		Validation loss:0.00205		                Ratio(Val/Train): 1.24305
+-------------------------------------------------------------------------------------------
+Epoch: 29. Completion time:690.756 
+Train loss: 0.00166		Validation loss:0.00204		                Ratio(Val/Train): 1.23232
+-------------------------------------------------------------------------------------------
+Epoch: 23. Completion time:690.252 
+Train loss: 0.00164		Validation loss:0.00204		                Ratio(Val/Train): 1.24271
+-------------------------------------------------------------------------------------------
+Epoch: 24. Completion time:690.181 
+Train loss: 0.00164		Validation loss:0.00205		                Ratio(Val/Train): 1.24877
+-------------------------------------------------------------------------------------------
+Epoch: 25. Completion time:690.996 
+Train loss: 0.00164		Validation loss:0.00205		                Ratio(Val/Train): 1.24818
+-------------------------------------------------------------------------------------------
+Epoch: 26. Completion time:689.970 
+Train loss: 0.00164		Validation loss:0.00204		                Ratio(Val/Train): 1.24435
+-------------------------------------------------------------------------------------------
+Epoch: 27. Completion time:691.350 
+Train loss: 0.00164		Validation loss:0.00204		                Ratio(Val/Train): 1.24716
+-------------------------------------------------------------------------------------------
+Epoch: 28. Completion time:690.364 
+Train loss: 0.00163		Validation loss:0.00205		                Ratio(Val/Train): 1.25242
+-------------------------------------------------------------------------------------------
+Epoch: 29. Completion time:689.681 
+Train loss: 0.00163		Validation loss:0.00205		                Ratio(Val/Train): 1.25299
+-------------------------------------------------------------------------------------------
+Epoch: 23. Completion time:689.580 
+Train loss: 0.00164		Validation loss:0.00202		                Ratio(Val/Train): 1.23007
+-------------------------------------------------------------------------------------------
+Epoch: 24. Completion time:691.199 
+Train loss: 0.00164		Validation loss:0.00204		                Ratio(Val/Train): 1.24205
+-------------------------------------------------------------------------------------------
+Epoch: 25. Completion time:689.633 
+Train loss: 0.00163		Validation loss:0.00203		                Ratio(Val/Train): 1.24673
+-------------------------------------------------------------------------------------------
+Epoch: 26. Completion time:690.568 
+Train loss: 0.00164		Validation loss:0.00204		                Ratio(Val/Train): 1.24609
+-------------------------------------------------------------------------------------------
+Epoch: 27. Completion time:689.856 
+Train loss: 0.00163		Validation loss:0.00205		                Ratio(Val/Train): 1.25268
+-------------------------------------------------------------------------------------------
+Epoch: 28. Completion time:690.974 
+Train loss: 0.00163		Validation loss:0.00205		                Ratio(Val/Train): 1.25613
+-------------------------------------------------------------------------------------------
+Epoch: 29. Completion time:690.506 
+Train loss: 0.00163		Validation loss:0.00203		                Ratio(Val/Train): 1.24915
+-------------------------------------------------------------------------------------------
+Epoch: 23. Completion time:689.742 
+Train loss: 0.00163		Validation loss:0.00204		                Ratio(Val/Train): 1.25347
+-------------------------------------------------------------------------------------------
+Epoch: 24. Completion time:689.850 
+Train loss: 0.00163		Validation loss:0.00204		                Ratio(Val/Train): 1.25450
+-------------------------------------------------------------------------------------------
+Epoch: 25. Completion time:690.192 
+Train loss: 0.00163		Validation loss:0.00204		                Ratio(Val/Train): 1.25360
+-------------------------------------------------------------------------------------------
+Epoch: 26. Completion time:690.610 
+Train loss: 0.00163		Validation loss:0.00203		                Ratio(Val/Train): 1.24280
+-------------------------------------------------------------------------------------------
+Epoch: 27. Completion time:689.912 
+Train loss: 0.00163		Validation loss:0.00204		                Ratio(Val/Train): 1.25552
+-------------------------------------------------------------------------------------------
+Epoch: 28. Completion time:690.132 
+Train loss: 0.00163		Validation loss:0.00204		                Ratio(Val/Train): 1.24975
+-------------------------------------------------------------------------------------------
+Epoch: 29. Completion time:690.509 
+Train loss: 0.00163		Validation loss:0.00204		                Ratio(Val/Train): 1.24881
+-------------------------------------------------------------------------------------------
+Early Stopping...
+The best accuracy was 0.00202177193628 at epoch 22
+Model parameters were saved to /home/mvrigkas/hand_pose_estimation/models/NYU/score_fusing/local/0.050000

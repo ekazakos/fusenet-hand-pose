@@ -1,0 +1,21 @@
+#!/bin/bash
+#SBATCH -t 24:00:00
+#SBATCH -N 1 -n 20
+#SBATCH -J nyudense_fusingsum20.030000
+#SBATCH -o nyudense_fusingsum20.030000.o%j
+#SBATCH -e nyudense_fusingsum20.030000.err%j
+#SBATCH --mail-user=kazakosv90@gmail.com
+#SBATCH --mail-type=all
+#SBATCH --mem=64380
+#SBATCH -p gpu
+
+module add cuda-toolkit/7.5-cudnn-5.1
+module add python/2.7-gcc
+source ~/env/bin/activate
+module list
+
+hostname
+mpdboot
+python ~/hand_pose_estimation/training_script.py 5 dense_fusing 0.030000 2 sum --predef_hp --validate --save_model --save_loss --early_stopping --shuffle --weights_dir models/NYU/dense_fusing/sum/2/0.030000/weights.npz
+mpdallexit
+deactivate
