@@ -8,6 +8,7 @@ import struct
 import abc
 import numpy as np
 from scipy import misc
+import imageio
 import scipy.io as sio
 import h5py
 import cv2
@@ -443,7 +444,7 @@ class NYU_Dataset(Dataset):
         depth -- the depth image
         """
 
-        img = misc.imread(img_dir)
+        img = imageio.imread(img_dir)
         _, g, b = np.split(img, 3, axis=2)
         g = np.squeeze(g)
         b = np.squeeze(b)
