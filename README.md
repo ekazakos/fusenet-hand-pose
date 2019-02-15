@@ -16,7 +16,7 @@ nyu = NYU_Dataset('/path/NYU/dataset', '/path/NYU/hdf5')
 nyu.load_data()
 
 ```
-where */path/NYU/* should be replaced with the location of the unziped file from above. In *datasets_preprocessing.datasets*, there are also classes for converting to HDF5 the [ICVL]() and [MSRA]() datasets. Only NYU contains RGB-D images, while 
+where */path/NYU/* should be replaced with the location of the unziped file from above. In ```datasets_preprocessing.datasets```, there are also classes for converting to HDF5 the [ICVL]() and [MSRA]() datasets. Only NYU contains RGB-D images, while 
 ICVL and MSRA contain only depth images, so experiments have been done only for NYU. Nevertheless, you may
 want to train just the depth stream for ICVL and MSRA.
 
