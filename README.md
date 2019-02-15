@@ -7,6 +7,16 @@ using the [Lasagne](https://lasagne.readthedocs.io/en/latest/) DL framework.
 ## Dataset
 
 Download the [NYU dataset](https://cims.nyu.edu/~tompson/NYU_Hand_Pose_Dataset.htm#download) and unzip it.
+The code is designed to process the data in HDF5 format using [h5py](https://www.h5py.org). To convert
+the dataset in HDF5 format run the following code in your terminal:
+
+```python
+from datasets_preprocessing.datasets import NYU_Dataset
+nyu = NYU_Dataset('/path/NYU/dataset', '/path/NYU/hdf5')
+nyu.load_data()
+
+```
+where */path/NYU/* should be replaced with the location of the unziped file from above. 
 
 ## Publication
 
