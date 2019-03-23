@@ -32,12 +32,11 @@ class TrainingTesting(object):
     NYU = 'NYU'
     ICVL = 'ICVL'
 
-    def __init__(self, net_specs_dict, model_hp_dict, num_joints, dataset,
+    def __init__(self, dataset_dir, net_specs_dict, model_hp_dict, num_joints, dataset,
                  group, network_type, input_channels=None, fusion_level=None,
                  fusion_type=None):
         self.convnet = ConvNet(net_specs_dict, model_hp_dict, num_joints)
-        self._datasets_dir = '/project/kakadiaris/biometrics/shared_datasets/'\
-            + 'hands_hdf5'
+        self._datasets_dir = dataset_dir
         if dataset not in [self.ICVL, self.MSRA, self.NYU]:
             raise ValueError("dataset can take one of the following values:"
                              + " 'MSRA', 'NYU', 'ICVL'")
@@ -54,7 +53,7 @@ class Training(TrainingTesting):
     This class implements the training procedure of the convnet
     """
 
-    def __init__(self, num_joints, dataset, group, network_type, num_epochs,
+    def __init__(self, dataset_dir, num_joints, dataset, group, network_type, num_epochs,
                  patience, net_specs_dict, model_hp_dict=None,
                  opt_hp_dict=None, validate=True, input_channels=None,
                  fusion_level=None, fusion_type=None, weights_dir=None):
@@ -66,7 +65,7 @@ class Training(TrainingTesting):
         else:
             self._save_settings = False
         super(Training, self).__init__(
-            net_specs_dict, model_hp_dict, num_joints, dataset, group,
+            dataset_dir, net_specs_dict, model_hp_dict, num_joints, dataset, group,
             network_type, input_channels=input_channels,
             fusion_level=fusion_level, fusion_type=fusion_type)
         if network_type not in [self.SIMPLE, self.AUTOENCODING, self.FUSING,

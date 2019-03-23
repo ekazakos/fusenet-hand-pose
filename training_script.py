@@ -25,6 +25,7 @@ if __name__ == '__main__':
                                  'local'],
                         help='Fusion functions. Use \'local\' only with score'
                         + 'fusion.')
+    parser.add_argument('--dataset_dir')
     parser.add_argument('--predef_hp', action='store_true', help='boolean that'
                         + 'specifies whether or not to use predifined'
                         + 'hyperparams')
@@ -64,7 +65,7 @@ if __name__ == '__main__':
     else:
         opt_hp_dict = None
         model_hp_dict = None
-    tr = trainingtesting.Training(14, 'NYU', 'train', args.net_type, 50, 5,
+    tr = trainingtesting.Training(args.dataset_dir, 14, 'NYU', 'train', args.net_type, 50, 5,
                                   net_specs_dict, model_hp_dict=model_hp_dict,
                                   opt_hp_dict=opt_hp_dict,
                                   validate=args.validate,
