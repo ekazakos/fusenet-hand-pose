@@ -2,7 +2,7 @@
 This file contains definitions for different network architectures.
 """
 from collections import OrderedDict
-from lasagne.layers import InputLayer, Conv2DLayer, MaxPool2DLayer, DenseLayer, dropout, ElemwiseMergeLayer, concat, reshape, Conv1DLayer, ElemwiseSumLayer, LocallyConnected2dLayer
+from lasagne.layers import InputLayer, Conv2DLayer, MaxPool2DLayer, DenseLayer, dropout, ElemwiseMergeLayer, concat, reshape, Conv1DLayer, ElemwiseSumLayer, LocallyConnected2DLayer
 import lasagne.nonlinearities
 import lasagne
 import theano.tensor as T
