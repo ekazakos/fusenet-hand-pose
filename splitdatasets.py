@@ -8,7 +8,7 @@ sets for later hyper-parameter selection. The 2 functions are the following:
 
 import h5py
 import numpy as np
-from sklearn.cross_validation import train_test_split
+from sklearn.model_selection import train_test_split
 
 
 def split_dsets_trainval(hdf5_file, save_dir):
