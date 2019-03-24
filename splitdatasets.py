@@ -10,6 +10,7 @@ import h5py
 import numpy as np
 from sklearn.model_selection import train_test_split
 import argparse
+import os
 
 
 def split_dsets_trainval(hdf5_file, save_dir):
@@ -63,6 +64,8 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
+    if not os.path.exists('./train_test_splits/'):
+        os.mkdir('./train_test_splits/')
     dataset_hdf5 = h5py.File(args.dataset_dir, 'r')
     split_dsets_trainval(dataset_hdf5, './train_test_splits/nyu_split_fuse.npz')
     dataset_hdf5.close()
