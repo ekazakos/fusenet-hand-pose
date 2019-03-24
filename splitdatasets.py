@@ -9,6 +9,7 @@ sets for later hyper-parameter selection. The 2 functions are the following:
 import h5py
 import numpy as np
 from sklearn.model_selection import train_test_split
+import argparse
 
 
 def split_dsets_trainval(hdf5_file, save_dir):
@@ -55,10 +56,16 @@ def load_dsets_trainval(train_val_dir):
 
 if __name__ == '__main__':
 
-    nyu_hdf5 = h5py.File('/project/kakadiaris/biometrics/'
-                         'shared_datasets/hands_hdf5/NYU.hdf5', 'r')
-    split_dsets_trainval(nyu_hdf5, './train_test_splits/nyu_split_fuse.npz')
-    nyu_hdf5.close()
+    parser = argparse.ArgumentParser(
+        description='''Provides a split of dataset's indices into training/validation,
+        to be used by the batch generator''')
+    parser.add_argument('dataset_dir', help='Dataset\'s (in HDF5 format) directory')
+
+    args = parser.parse_args()
+
+    dataset_hdf5 = h5py.File(args.dataset_dir, 'r')
+    split_dsets_trainval(dataset_hdf5, './train_test_splits/nyu_split_fuse.npz')
+    dataset_hdf5.close()
     """
     icvl_hdf5 = h5py.File('/project/kakadiaris/biometrics/'
                           'shared_datasets/hands_hdf5/ICVL.hdf5', 'r')
