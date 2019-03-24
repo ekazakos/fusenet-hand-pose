@@ -92,9 +92,7 @@ class Training(TrainingTesting):
             input_var1 = T.tensor4('inputs_rgb')
             input_var2 = T.tensor4('inputs_depth')
         target_var = T.matrix('targets')
-        # bottleneck_W = np.load('/project/kakadiaris/biometrics/'
-        #                        + 'shared_datasets/hands_hdf5/'
-        #                        + 'nyu_princ_comp_pose.npz')
+        # bottleneck_W = np.load('nyu_princ_comp_pose.npz')
         # bottleneck_W = bottleneck_W['arr_0']
         lr = theano.shared(np.array(self._opt_hp_dict['lr'],
                                     dtype=theano.config.floatX))
@@ -671,9 +669,7 @@ class Testing(TrainingTesting):
         else:
             input_var1 = T.tensor4('inputs_rgb')
             input_var2 = T.tensor4('inputs_depth')
-        # bottleneck_W = np.load('/project/kakadiaris/biometrics/'
-        #                        + 'shared_datasets/hands_hdf5/'
-        #                        + 'nyu_princ_comp_pose.npz')
+        # bottleneck_W = np.load('nyu_princ_comp_pose.npz')
         # bottleneck_W = bottleneck_W['arr_0']
         print 'Building the ConvNet...\n'
         if self._network_type == self.SIMPLE:
@@ -778,7 +774,7 @@ class Testing(TrainingTesting):
 
     def extract_kernels(self, layer, weights_dir):
 
-        # bottleneck_W = np.load('/project/kakadiaris/biometrics/' + 'shared_datasets/hands_hdf5/' + 'nyu_princ_comp_pose.npz')
+        # bottleneck_W = np.load('nyu_princ_comp_pose.npz')
         # bottleneck_W = bottleneck_W['arr_0']
         print 'Building the ConvNet...\n'
         if self._network_type == self.SIMPLE:
