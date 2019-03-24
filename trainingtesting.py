@@ -485,7 +485,10 @@ class Training(TrainingTesting):
         if type(save_model) is not bool:
             raise TypeError('save_model should be boolean')
         if save_model:
-            models_dir = '/home/mvrigkas/hand_pose_estimation/models'
+            models_dir = './models'
+            if not os.path.exists(models_dir):
+                os.mkdir(models_dir)
+
             if self._network_type == self.SIMPLE:
                 if self._input_channels == 1:
                     input_type = 'depth'
@@ -543,8 +546,9 @@ class Training(TrainingTesting):
             training_information = self._training_loop_simple(
                 bg_train, bg_val, fn_train, fn_val, lr, lr_decay)
         if self._save_settings:
-            settings_dir = '/home/mvrigkas/hand_pose_estimation/'\
-                    + 'settings'
+            settings_dir = './settings'
+            if not os.path.exists(settings_dir):
+                os.mkdir(settings_dir)
             val_loss_array = np.array(training_information['val_loss'])
             best_loss = np.amin(val_loss_array)
             if self._network_type == self.SIMPLE:
@@ -587,8 +591,9 @@ class Training(TrainingTesting):
                                  self._opt_hp_dict, self._model_hp_dict,
                                  best_loss)
         if save_loss:
-            train_val_loss_dir = '/home/mvrigkas/hand_pose_estimation'\
-                '/train_val_loss'
+            train_val_loss_dir = './train_val_loss'
+            if not os.path.exists(train_val_loss_dir):
+                os.mkdir(train_val_loss_dir)
             if self._network_type == self.SIMPLE:
                 if self._input_channels == 1:
                     input_type = 'depth'
@@ -723,8 +728,9 @@ class Testing(TrainingTesting):
 
         predictions = np.array(predictions)
         if save_preds:
-            predictions_dir = '/home/mvrigkas/hand_pose_estimation/'\
-                    + 'predictions'
+            predictions_dir = './predictions'
+            if not os.path.exists(predictions_dir):
+                os.mkdir(predictions_dir)
             if self._network_type == self.SIMPLE:
                 if self._input_channels == 1:
                     input_type = 'depth'
