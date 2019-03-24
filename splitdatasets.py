@@ -60,6 +60,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description='''Provides a split of dataset's indices into training/validation,
         to be used by the batch generator''')
+    parser.add_argument('dataset', choices=['nyu', 'msra', 'icvl'])
     parser.add_argument('dataset_dir', help='Dataset\'s (in HDF5 format) directory')
 
     args = parser.parse_args()
@@ -67,6 +68,6 @@ if __name__ == '__main__':
     if not os.path.exists('./train_test_splits/'):
         os.mkdir('./train_test_splits/')
     dataset_hdf5 = h5py.File(args.dataset_dir, 'r')
-    split_dsets_trainval(dataset_hdf5, './train_test_splits/nyu_split_fuse.npz')
+    split_dsets_trainval(dataset_hdf5, './train_test_splits/'+args.dataset+'_split.npz')
     dataset_hdf5.close()
 
