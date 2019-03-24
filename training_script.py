@@ -51,14 +51,7 @@ if __name__ == '__main__':
                       'conv_filter_size': (3,)*9,
                       'conv_pad': (1,)*9,
                       'num_fc_units': (4096, 4096)}
-    '''
-    # PosePriorNet
-    net_specs_dict = {'num_conv_layers': 3, 'num_conv_filters':
-                      (8, 8, 8),
-                      'conv_filter_size': (5, 5, 3),
-                      'conv_pad': (2, 2, 1),
-                      'num_fc_units': (1024, 1024)}
-    '''
+
     if args.predef_hp:
         opt_hp_dict = {'lr': 0.009, 'mom': 0.98}
         model_hp_dict = {'p': args.p}

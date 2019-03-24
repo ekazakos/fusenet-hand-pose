@@ -59,7 +59,6 @@ class ConvNet(object):
                     net.values()[layer], pool_size=(3, 3))
                 layer += 1
             else:
-                # if i < 2:
                 if i < 4:
                     if (i+1) % 2 == 0:
                         # Add pooling layers
@@ -67,15 +66,6 @@ class ConvNet(object):
                             net.values()[layer], pool_size=(3, 3))
                         layer += 1
                 else:
-                    '''
-                    if (i+1) % 2 == 0:
-                        # Add pooling layers
-                        net['pool{0:d}'.format(i+1)] = MaxPool2DLayer(
-                            net.values()[layer], pool_size=(2, 2))
-                        layer += 1
-                    '''
-                    # if (i+1) == 5 or (i+1) == 8:
-
                     if (i+1) == 7:
                         # Add pooling layers
                         net['pool{0:d}'.format(i+1)] = MaxPool2DLayer(
@@ -145,7 +135,6 @@ class ConvNet(object):
                     net.values()[layer], pool_size=(3, 3))
                 layer += 1
             else:
-                # if i < 2:
                 if i < 4:
                     if (i+1) % 2 == 0:
                         # Add pooling layers
@@ -153,15 +142,6 @@ class ConvNet(object):
                             net.values()[layer], pool_size=(3, 3))
                         layer += 1
                 else:
-                    '''
-                    if (i+1) % 2 == 0:
-                        # Add pooling layers
-                        net['pool{0:d}'.format(i+1)] = MaxPool2DLayer(
-                            net.values()[layer], pool_size=(2, 2))
-                        layer += 1
-                    '''
-                    # if (i+1) == 5 or (i+1) == 8:
-
                     if (i+1) == 7:
                         # Add pooling layers
                         net['pool{0:d}'.format(i+1)] = MaxPool2DLayer(
@@ -215,7 +195,6 @@ class ConvNet(object):
                     net.values()[layer], pool_size=(3, 3))
                 layer += 1
             else:
-                # if i < 2 and i != fusion_level-1:
                 if i < 4:
                     if (i+1) % 2 == 0:
                         # Add pooling layers
@@ -223,15 +202,6 @@ class ConvNet(object):
                             net.values()[layer], pool_size=(3, 3))
                         layer += 1
                 else:
-                    '''
-                    if (i+1) % 2 == 0:
-                        # Add pooling layers
-                        net['pool{0:d}'.format(i+1)] = MaxPool2DLayer(
-                            net.values()[layer], pool_size=(2, 2))
-                        layer += 1
-                    '''
-                    # if (i+1) == 5 or (i+1) == 8:
-
                     if (i+1) == 7:
                         # Add pooling layers
                         net['pool_rgb{0:d}'.format(i+1)] = MaxPool2DLayer(
@@ -268,7 +238,6 @@ class ConvNet(object):
                     net.values()[layer], pool_size=(3, 3))
                 layer += 1
             else:
-                # if i < 2 and i != fusion_level-1:
                 if i < 4:
                     if (i+1) % 2 == 0:
                         # Add pooling layers
@@ -277,15 +246,6 @@ class ConvNet(object):
                                            pool_size=(3, 3))
                         layer += 1
                 else:
-                    '''
-                    if (i+1) % 2 == 0:
-                        # Add pooling layers
-                        net['pool{0:d}'.format(i+1)] = MaxPool2DLayer(
-                            net.values()[layer], pool_size=(2, 2))
-                        layer += 1
-                    '''
-                    # if (i+1) == 5 or (i+1) == 8:
-
                     if (i+1) == 7:
                         # Add pooling layers
                         net['pool_depth{0:d}'.format(i+1)] =\
@@ -397,7 +357,6 @@ class ConvNet(object):
                     net.values()[layer], pool_size=(3, 3))
                 layer += 1
             else:
-                # if i < 2 and i != fusion_level-1:
                 if i < 4:
                     if (i+1) % 2 == 0 and i != fusion_level-1:
                         # Add pooling layers
@@ -405,15 +364,6 @@ class ConvNet(object):
                             net.values()[layer], pool_size=(3, 3))
                         layer += 1
                 else:
-                    '''
-                    if (i+1) % 2 == 0:
-                        # Add pooling layers
-                        net['pool{0:d}'.format(i+1)] = MaxPool2DLayer(
-                            net.values()[layer], pool_size=(2, 2))
-                        layer += 1
-                    '''
-                    # if (i+1) == 5 or (i+1) == 8:
-
                     if (i+1) == 7 and i != fusion_level-1:
                         # Add pooling layers
                         net['pool_rgb{0:d}'.format(i+1)] = MaxPool2DLayer(
@@ -438,7 +388,6 @@ class ConvNet(object):
                     net.values()[layer], pool_size=(3, 3))
                 layer += 1
             else:
-                # if i < 2 and i != fusion_level-1:
                 if i < 4:
                     if (i+1) % 2 == 0 and i != fusion_level-1:
                         # Add pooling layers
@@ -447,15 +396,6 @@ class ConvNet(object):
                                            pool_size=(3, 3))
                         layer += 1
                 else:
-                    '''
-                    if (i+1) % 2 == 0:
-                        # Add pooling layers
-                        net['pool{0:d}'.format(i+1)] = MaxPool2DLayer(
-                            net.values()[layer], pool_size=(2, 2))
-                        layer += 1
-                    '''
-                    # if (i+1) == 5 or (i+1) == 8:
-
                     if (i+1) == 7 and i != fusion_level-1:
                         # Add pooling layers
                         net['pool_depth{0:d}'.format(i+1)] =\
@@ -514,7 +454,6 @@ class ConvNet(object):
                         net.values()[layer], pool_size=(3, 3))
                     layer += 1
                 else:
-                    # if i < 2:
                     if i < 4:
                         if (i+1) % 2 == 0:
                             # Add pooling layers
@@ -523,15 +462,6 @@ class ConvNet(object):
                                                pool_size=(3, 3))
                             layer += 1
                     else:
-                        '''
-                        if (i+1) % 2 == 0:
-                            # Add pooling layers
-                            net['pool{0:d}'.format(i+1)] = MaxPool2DLayer(
-                                net.values()[layer], pool_size=(2, 2))
-                            layer += 1
-                        '''
-                        # if (i+1) == 5 or (i+1) == 8:
-
                         if (i+1) == 7:
                             # Add pooling layers
                             net['pool_merged{0:d}'.format(i+1)] =\
