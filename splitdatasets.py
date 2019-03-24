@@ -52,9 +52,6 @@ def load_dsets_trainval(train_val_dir):
     return idx_train, idx_val
 
 
-# If this file is called directly from command line the following lines will
-# save NYU and ICVL datasets' train/validation indexes
-
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(
