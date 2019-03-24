@@ -69,14 +69,4 @@ if __name__ == '__main__':
     dataset_hdf5 = h5py.File(args.dataset_dir, 'r')
     split_dsets_trainval(dataset_hdf5, './train_test_splits/nyu_split_fuse.npz')
     dataset_hdf5.close()
-    """
-    icvl_hdf5 = h5py.File('/project/kakadiaris/biometrics/'
-                          'shared_datasets/hands_hdf5/ICVL.hdf5', 'r')
-    split_dsets_trainval(icvl_hdf5, './train_test_splits/icvl_split.npz')
-    icvl_hdf5.close()
 
-    msra_hdf5 = h5py.File('/project/kakadiaris/biometrics/'
-                          'shared_datasets/hands_hdf5/MSRA.hdf5', 'r')
-    split_dsets_trainval(msra_hdf5, './train_test_splits/msra_split.npz')
-    msra_hdf5.close()
-    """
