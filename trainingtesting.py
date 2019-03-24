@@ -85,7 +85,7 @@ class Training(TrainingTesting):
         self._weights_dir = weights_dir
         return
 
-    def compile_functions_simple(self):
+    def _compile_functions(self):
         if self._network_type == self.SIMPLE:
             input_var = T.tensor4('inputs')
         else:
@@ -146,59 +146,7 @@ class Training(TrainingTesting):
              val_loss])
         return (fn_train, fn_val, net, lr, lr_decay)
 
-    def compile_functions_autoencoding(self, updates_mode):
-        input_var = T.tensor4('inputs')
-        target_var1 = T.matrix('targets1')
-        target_var2 = T.matrix('targets2')
-        lr = theano.shared(np.array(self._opt_hp_dict['lr'], dtype=theano.config.floatX))
-        lr_decay = np.array(0.1, dtype=theano.config.floatX)
-        mom = theano.shared(np.array(self._opt_hp_dict['mom'], dtype=theano.config.floatX))
-        print 'Building the ConvNet...\n'
-        net = self.convnet.encoding_convnet(input_var)
-        print 'Compiling theano functions...\n'
-        train_pred_regr, train_pred_rec = lasagne.layers.get_output([
-         net['output'], net['decoder']], deterministic=False)
-        val_pred_regr, val_pred_rec = lasagne.layers.get_output([
-         net['output'], net['decoder']], deterministic=True)
-        train_loss_regr = lasagne.objectives.squared_error(train_pred_regr, target_var1)
-        train_loss_regr = 1 / 2.0 * T.mean(T.sum(train_loss_regr, axis=1))
-        val_loss_regr = lasagne.objectives.squared_error(val_pred_regr, target_var1)
-        val_loss_regr = 1 / 2.0 * T.mean(T.sum(val_loss_regr, axis=1))
-        output_fc1 = lasagne.layers.get_output(net['fc1'], deterministic=True)
-        fn_fc1 = theano.function([input_var], [output_fc1])
-        train_loss_rec = lasagne.objectives.squared_error(train_pred_rec, target_var2)
-        train_loss_rec = 1 / 2.0 * T.mean(T.sum(train_loss_rec, axis=1))
-        val_loss_rec = lasagne.objectives.squared_error(val_pred_rec, target_var2)
-        val_loss_rec = 1 / 2.0 * T.mean(T.sum(val_loss_rec, axis=1))
-        if updates_mode == 'double':
-            params_regr = lasagne.layers.get_all_params(net['output'], trainable=True)
-            updates_regr = lasagne.updates.nesterov_momentum(train_loss_regr, params_regr, learning_rate=lr, momentum=mom)
-            fn_train_regr = theano.function([input_var, target_var1], [ train_loss_regr], updates=updates_regr)
-            fn_val_regr = theano.function([input_var, target_var1], [
-             val_loss_regr])
-            params_rec = lasagne.layers.get_all_params(net['decoder'], trainable=True)
-            updates_rec = lasagne.updates.nesterov_momentum(self._opt_hp_dict['lambda_rec'] * train_loss_rec, params_rec, learning_rate=lr, momentum=mom)
-            fn_train_rec = theano.function([input_var, target_var2], [
-             train_loss_rec], updates=updates_rec)
-            fn_val_rec = theano.function([input_var, target_var2], [
-             val_loss_rec])
-            return (
-             fn_train_regr, fn_val_regr, fn_train_rec, fn_val_rec,
-             fn_fc1, net, lr, lr_decay)
-        else:
-            params_comb = lasagne.layers.get_all_params([net['output'],
-             net['decoder']], trainable=True)
-            updates_comb = lasagne.updates.nesterov_momentum(train_loss_regr + self._opt_hp_dict['lambda_rec'] * train_loss_rec, params_comb, learning_rate=lr, momentum=mom)
-            fn_train_comb = theano.function([input_var, target_var1,
-             target_var2], [
-             train_loss_regr, train_loss_rec], updates=updates_comb)
-            fn_val_comb = theano.function([input_var, target_var1,
-             target_var2], [
-             val_loss_regr, val_loss_rec])
-            return (
-             fn_train_comb, fn_val_comb, fn_fc1, net, lr, lr_decay)
-
-    def _training_loop_simple(self, bg_train, bg_val, fn_train, fn_val, lr,
+    def _training_loop(self, bg_train, bg_val, fn_train, fn_val, lr,
                               lr_decay, sw=None, es=None):
         """
         This function performs the training loop for the case of a simple
@@ -286,178 +234,7 @@ class Training(TrainingTesting):
         training_information['val_loss'] = val_loss_d
         return training_information
 
-    def _training_loop_autoencoding(self, bg_train, bg_val, fn_train_regr, fn_val_regr, fn_fc1, lr, lr_decay, net, fn_train_rec=None, fn_val_rec=None, sw=None, es=None):
-        """
-        This function performs the training loop for the case of a simple
-        convnet, where the parameters are updated through backprop and the
-        training/validation losses are reported.
-        
-        Keyword arguments:
-        
-        minibatches_train -- batch generator for the training set
-        minibatches_val -- batch generator for the validation set
-        fn_train_regr -- theano function that perform parameters updates and
-                         computes training loss for the regression part of the
-                         network
-        fn_val_regr -- theano function that computes validation loss for the
-                       regression part of the network
-        fn_train_rec -- theano function that perform parameters updates and
-                         computes training loss for the regression part of the
-                         network
-        fn_val_rec -- theano function that computes validation loss for the
-                       regression part of the network
-        lr -- learning rate(theano shared variable)
-        lr_decay -- learning rate decay constant(we use constant decay policy)
-        save_model -- boolean thatdefines wether to save model parameters
-        updates_mode -- specifies how parameters updates are performed. It can
-                        take two different values: 'single', 'double'.
-                        'single': updates are performed with one
-                        forward-backward pass by encapsulating the gradients
-                        wrt both losses in one update
-                        'double': updates are performed with two
-                        forward-backward passes. In the first, the gradients
-                        wrt regression loss are backpropagated
-                        while in the second one the gradients wrt to
-                        autoencoding loss are backpropagated.
-        sw -- instance of SaveWeights class(default: None)
-        
-        """
-        training_information = {}
-        train_loss_regr_d = []
-        val_loss_regr_d = []
-        train_loss_rec_d = []
-        val_loss_rec_d = []
-        for epoch in xrange(self._num_epochs):
-            train_loss_regr = 0
-            train_loss_rec = 0
-            train_batches = 0
-            start_time = time.time()
-            for batch in bg_train.generate_batches():
-                X_batch, y_batch = batch
-                fc1_batch = fn_fc1(X_batch)
-                if fn_train_rec is None:
-                    loss_regr, loss_rec = fn_train_regr(X_batch, y_batch, fc1_batch[0])
-                    train_loss_regr += loss_regr
-                    train_loss_rec += loss_rec
-                else:
-                    loss_regr = fn_train_regr(X_batch, y_batch)
-                    loss_rec = fn_train_rec(X_batch, fc1_batch[0])
-                    train_loss_regr += loss_regr[0]
-                    train_loss_rec += loss_rec[0]
-                train_batches += 1
-
-            train_loss_regr /= train_batches
-            train_loss_rec /= train_batches
-            train_loss_regr_d.append(train_loss_regr)
-            train_loss_rec_d.append(train_loss_rec)
-            val_loss_regr = 0
-            val_loss_rec = 0
-            val_batches = 0
-            for batch in bg_val.generate_batches(batch_size=1):
-                X_batch, y_batch = batch
-                fc1_batch = fn_fc1(X_batch)
-                if fn_val_rec is None:
-                    loss_regr, loss_rec = fn_val_regr(X_batch, y_batch, fc1_batch[0])
-                    val_loss_regr += loss_regr
-                    val_loss_rec += loss_rec
-                else:
-                    loss_regr = fn_val_regr(X_batch, y_batch)
-                    loss_rec = fn_val_rec(X_batch, fc1_batch[0])
-                    val_loss_regr += loss_regr[0]
-                    val_loss_rec += loss_rec[0]
-                val_batches += 1
-
-            val_loss_regr /= val_batches
-            val_loss_rec /= val_batches
-            val_loss_regr_d.append(val_loss_regr)
-            val_loss_rec_d.append(val_loss_rec)
-            print 'Epoch: {0:d}. Completion time:{1:.3f} '.format(epoch + 1, time.time() - start_time)
-            print 'Train loss regression: {0:.5f}\t\tValidation loss regression :{1:.5f}\t\tRatio(Val/Train): {2:.5f}'.format(train_loss_regr, val_loss_regr, val_loss_regr / train_loss_regr)
-            print 'Train loss reconstruction: {0:.5f}\tValidation loss reconstruction: {1:.5f}\t\tRatio(Val/Train): {2:.5f}'.format(train_loss_rec, val_loss_rec, val_loss_rec / train_loss_rec)
-            print '-------------------------------------------------------------------------------------------'
-            if sw is not None:
-                if sw.early_stopping(val_loss_regr, epoch) or epoch == self._num_epochs - 1:
-                    sw.save_weights_numpy()
-                    break
-            elif es is not None:
-                if es.early_stopping(val_loss_regr, epoch) or epoch == self._num_epochs - 1:
-                    break
-
-        training_information['train_loss_regr'] = train_loss_regr_d
-        training_information['val_loss_regr'] = val_loss_regr_d
-        training_information['train_loss_rec'] = train_loss_rec_d
-        training_information['val_loss_rec'] = val_loss_rec_d
-        return training_information
-
-    def train(self, save_model=False, early_stopping=True, updates_mode='single'):
-        """
-        This function performs the training of our ConvNets. It compiles the
-        theano functions and performs parameters updates
-        (by calling compile_functions), saves several useful
-        information during training and stops using early stopping where also
-        the model parameters are saved. All the basic components are described
-        below as well as their respective modules/functions:
-            1) functions compilation: Training.compile_functions(module:
-                trainingtesting). Here you can also find optimization details
-                such as regularization term in the loss for autoencoder
-            2) load/save weights, early stopping: SaveWeights,
-            LoadWeights(module: saveloadweights)
-            3) networks definitions: module: networks.py. Here you can find
-            details related with network design choices as well as
-            regularization layers(e.g. dropout) or other techniques such as
-            tied weights in the autoencoder.
-        """
-        dataset = os.path.join(self._datasets_dir, self._dataset)
-        dataset += '.hdf5'
-        dset = h5py.File(dataset, 'r')
-        if self._network_type == self.SIMPLE:
-            fn_train, fn_val, net, lr, lr_decay = self.compile_functions_simple(self._input_channels)
-        elif updates_mode == 'double':
-            fn_train_regr, fn_val_regr, fn_train_rec, fn_val_rec, fn_fc1, net, lr, lr_decay = self.compile_functions_autoencoding(updates_mode)
-        else:
-            fn_train_comb, fn_val_comb, fn_fc1, net, lr, lr_decay = self.compile_functions_autoencoding(updates_mode)
-        if type(save_model) is not bool:
-            raise TypeError('save_model should be boolean')
-        if save_model:
-            sw = SaveWeights('./models/{0:s}/{1:s}.pkl'.format(self._dataset, self._network_type), net, self._patience, 'loss')
-        elif early_stopping:
-            es = EarlyStopping(net, self._patience, 'loss')
-        if self._validate:
-            if self._dataset == self.NYU:
-                idx_train, idx_val = load_dsets_trainval('./train_test_splits/nyu_split.npz')
-            elif self._dataset == self.ICVL:
-                idx_train, idx_val = load_dsets_trainval('./train_test_splits/icvl_split.npz')
-            else:
-                idx_train, idx_val = load_dsets_trainval('./train_test_splits/msra_split.npz')
-            bg_train = BatchGenerator(dset, self._dataset, self._group, iterable=idx_train)
-            bg_val = BatchGenerator(dset, self._dataset, self._group, iterable=idx_val)
-        else:
-            bg_train = BatchGenerator(dset, self._dataset, self._group)
-        print 'Training started...\n'
-        if self._network_type is self.SIMPLE:
-            if save_model:
-                training_information = self._training_loop_simple(bg_train, bg_val, fn_train, fn_val, lr, lr_decay, sw)
-            elif early_stopping:
-                training_information = self._training_loop_simple(bg_train, bg_val, fn_train, fn_val, lr, lr_decay, es)
-            else:
-                training_information = self._training_loop_simple(bg_train, bg_val, fn_train, fn_val, lr, lr_decay)
-        elif save_model:
-            if updates_mode == 'double':
-                training_information = self._training_loop_autoencoding(bg_train, bg_val, fn_train_regr, fn_val_regr, fn_fc1, lr, lr_decay, net, fn_train_rec, fn_val_rec, sw)
-            else:
-                training_information = self._training_loop_autoencoding(bg_train, bg_val, fn_train_comb, fn_val_comb, fn_fc1, lr, lr_decay, net, sw)
-        elif early_stopping:
-            if updates_mode == 'double':
-                training_information = self._training_loop_autoencoding(bg_train, bg_val, fn_train_regr, fn_val_regr, fn_fc1, lr, lr_decay, net, fn_train_rec, fn_val_rec, es)
-            else:
-                training_information = self._training_loop_autoencoding(bg_train, bg_val, fn_train_comb, fn_val_comb, fn_fc1, lr, lr_decay, net, es)
-        elif updates_mode == 'double':
-            training_information = self._training_loop_autoencoding(bg_train, bg_val, fn_train_regr, fn_val_regr, fn_fc1, lr, lr_decay, net, fn_train_rec, fn_val_rec)
-        else:
-            training_information = self._training_loop_autoencoding(bg_train, bg_val, fn_train_comb, fn_val_comb, fn_fc1, lr, lr_decay, net)
-        return training_information
-
-    def train_fused(self, save_model=False, save_loss=False,
+    def train(self, save_model=False, save_loss=False,
                     early_stopping=True, shuffle=False):
         """
         This function performs the training of our ConvNets. It compiles the
@@ -480,7 +257,7 @@ class Training(TrainingTesting):
         dataset += '.hdf5'
         dset = h5py.File(dataset, 'r')
 
-        fn_train, fn_val, net, lr, lr_decay = self.compile_functions_simple()
+        fn_train, fn_val, net, lr, lr_decay = self._compile_functions()
 
         if type(save_model) is not bool:
             raise TypeError('save_model should be boolean')
@@ -537,13 +314,13 @@ class Training(TrainingTesting):
                                       shuffle=shuffle)
         print 'Training started...\n'
         if save_model:
-            training_information = self._training_loop_simple(
+            training_information = self._training_loop(
                 bg_train, bg_val, fn_train, fn_val, lr, lr_decay, sw=sw)
         elif early_stopping:
-            training_information = self._training_loop_simple(
+            training_information = self._training_loop(
                 bg_train, bg_val, fn_train, fn_val, lr, lr_decay, es=es)
         else:
-            training_information = self._training_loop_simple(
+            training_information = self._training_loop(
                 bg_train, bg_val, fn_train, fn_val, lr, lr_decay)
         if self._save_settings:
             settings_dir = './settings'
@@ -791,6 +568,3 @@ class Testing(TrainingTesting):
         lw = LoadWeights(weights_dir, net)
         lw.load_weights_numpy()
         return net[layer].W
-
-
-

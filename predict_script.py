@@ -1,6 +1,4 @@
 from trainingtesting import Testing
-# from statsmodels.stats.weightstats import ztest
-# import numpy as np
 
 net_specs_dict = {'num_conv_layers': 9, 'num_conv_filters':
                   (32, 32, 64, 64, 128, 128, 128, 128, 128),
@@ -23,20 +21,4 @@ test = Testing(net_specs_dict, model_hp_dict, 14, 'NYU', 'test',
 predictions =\
         test.predict('/home/mvrigkas/hand_pose_estimation/'
                      + 'models/NYU/score_fusing/local/0.050000/weights.npz')
-'''
-kernels_rgb = test.extract_kernels('conv_rgb3', '/home/ekazakos/lasagne/'
-                                   + 'hand_pose_estimation/models/NYU/'
-                                   + 'fusing/sum/3/weights.npz')
 
-kernels_depth = test.extract_kernels('conv_depth3', '/home/ekazakos/lasagne/'
-                                     + 'hand_pose_estimation/models/NYU/'
-                                     + 'fusing/sum/3/weights.npz')
-# test.fuse_scores()
-kernels_rgb, kernels_depth = kernels_rgb.get_value(), kernels_depth.get_value()
-kernels_rgb, kernels_depth = np.reshape(kernels_rgb, (64*32, 9)),\
-        np.reshape(kernels_depth, (64*32, 9))
-norm_rgb, norm_depth = np.linalg.norm(kernels_rgb, axis=1),\
-        np.linalg.norm(kernels_depth, axis=1)
-print norm_rgb, norm_depth
-print ztest(norm_rgb, x2=norm_depth, alternative='smaller')
-'''

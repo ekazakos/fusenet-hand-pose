@@ -73,7 +73,7 @@ if __name__ == '__main__':
                                   fusion_level=args.fusion_level,
                                   fusion_type=args.fusion_type,
                                   weights_dir=args.weights_dir)
-    training_inf = tr.train_fused(save_model=args.save_model,
-                                  save_loss=args.save_loss,
-                                  early_stopping=args.early_stopping,
-                                  shuffle=args.shuffle)
+    training_inf = tr.train(save_model=args.save_model,
+                            save_loss=args.save_loss,
+                            early_stopping=args.early_stopping,
+                            shuffle=args.shuffle)
