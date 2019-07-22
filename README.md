@@ -30,6 +30,17 @@ where */path/NYU/* should be replaced with the location of the unziped file from
 ICVL and MSRA contain only depth images, so experiments have been done only for NYU. Nevertheless, you may
 want to train just the depth stream for ICVL and MSRA.
 
+## Training 
+
+Example:
+
+```
+python training_script.py 5 conv_fusing 0.5 9 concat --dataset_dir ~/data-private/NYU/hdf5/ --predef_hp --shuffle --validate
+```
+
+For a full description of the input arguments do `python training_script.py -h`.
+
+
 ## Publication
 
 Please reference this publication if you find this code useful:

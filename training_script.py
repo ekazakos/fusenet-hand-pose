@@ -13,7 +13,7 @@ if __name__ == '__main__':
                         + 'channels. 1 for depth, 4 for rgb, 5 for rgbd or'
                         + 'fusion')
     parser.add_argument('net_type',
-                        choices=['simple', 'fusing', 'dense_fusing',
+                        choices=['simple', 'conv_fusing', 'dense_fusing',
                                  'score_fusing', 'input_fusing'],
                         help='type of network')
     parser.add_argument('p', type=float, help='dropout probability')

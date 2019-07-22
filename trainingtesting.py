@@ -24,7 +24,7 @@ from randomsearch import sample_hyperparams, save_hyperparams
 class TrainingTesting(object):
     SIMPLE = 'simple'
     AUTOENCODING = 'autoencoding'
-    FUSING = 'fusing'
+    CONV_FUSING = 'conv_fusing'
     DENSE_FUSING = 'dense_fusing'
     SCORE_FUSING = 'score_fusing'
     INPUT_FUSING = 'input_fusing'
@@ -68,11 +68,11 @@ class Training(TrainingTesting):
             dataset_dir, net_specs_dict, model_hp_dict, num_joints, dataset, group,
             network_type, input_channels=input_channels,
             fusion_level=fusion_level, fusion_type=fusion_type)
-        if network_type not in [self.SIMPLE, self.AUTOENCODING, self.FUSING,
+        if network_type not in [self.SIMPLE, self.AUTOENCODING, self.CONV_FUSING,
                                 self.DENSE_FUSING, self.SCORE_FUSING,
                                 self.INPUT_FUSING]:
             raise ValueError("Network types can take one of the following"
-                             + " values: 'simple', 'autoencoding', 'fusing',"
+                             + " values: 'simple', 'autoencoding', 'conv_fusing',"
                              + " 'dense_fusing', 'score_fusing',"
                              + " input_fusing")
         self._model_hp_dict = model_hp_dict
@@ -103,7 +103,7 @@ class Training(TrainingTesting):
         if self._network_type == self.SIMPLE:
             net = self.convnet.simple_convnet(self._input_channels,
                                               input_var=input_var)
-        elif self._network_type == self.FUSING:
+        elif self._network_type == self.CONV_FUSING:
             net = self.convnet.fused_convnets(self._fusion_level,
                                               self._fusion_type,
                                               input_var1=input_var1,
@@ -276,7 +276,7 @@ class Training(TrainingTesting):
                     self.convnet._model_hp_dict['p'])
                 sw = SaveWeights(os.path.join(models_dir, save_dir), net,
                                  self._patience, 'loss')
-            elif self._network_type == self.FUSING:
+            elif self._network_type == self.CONV_FUSING:
                 save_dir = '{0:s}/{1:s}/{2:s}/{3:d}/{4:f}'.format(
                     self._dataset, self._network_type, self._fusion_type,
                     self._fusion_level, self.convnet._model_hp_dict['p'])
@@ -339,7 +339,7 @@ class Training(TrainingTesting):
                 save_hyperparams(os.path.join(settings_dir, save_dir),
                                  self._opt_hp_dict, self._model_hp_dict,
                                  best_loss)
-            elif self._network_type == self.FUSING:
+            elif self._network_type == self.CONV_FUSING:
                 save_dir = '{0:s}/{1:s}/{2:s}/{3:d}/{4:f}'.format(
                     self._dataset, self._network_type, self._fusion_type,
                     self._fusion_level, self.convnet._model_hp_dict['p'])
@@ -386,7 +386,7 @@ class Training(TrainingTesting):
                         as f:
                     pickle.dump(training_information, f,
                                 protocol=pickle.HIGHEST_PROTOCOL)
-            elif self._network_type == self.FUSING:
+            elif self._network_type == self.CONV_FUSING:
                 save_dir = '{0:s}/{1:s}/{2:s}/{3:d}/{4:f}'.format(
                     self._dataset, self._network_type, self._fusion_type,
                     self._fusion_level, self.convnet._model_hp_dict['p'])
@@ -457,7 +457,7 @@ class Testing(TrainingTesting):
         if self._network_type == self.SIMPLE:
             net = self.convnet.simple_convnet(self._input_channels,
                                               input_var=input_var)
-        elif self._network_type == self.FUSING:
+        elif self._network_type == self.CONV_FUSING:
             net = self.convnet.fused_convnets(self._fusion_level,
                                               self._fusion_type,
                                               input_var1=input_var1,
@@ -520,7 +520,7 @@ class Testing(TrainingTesting):
                     os.makedirs(os.path.join(predictions_dir, save_dir))
                 np.savez(os.path.join(predictions_dir, save_dir,
                                       'predictions.npz'), predictions)
-            elif self._network_type == self.FUSING:
+            elif self._network_type == self.CONV_FUSING:
                 save_dir = '{0:s}/{1:s}/{2:s}/{3:d}/{4:f}'.format(
                     self._dataset, self._network_type, self._fusion_type,
                     self._fusion_level, self.convnet._model_hp_dict['p'])
@@ -562,7 +562,7 @@ class Testing(TrainingTesting):
         print 'Building the ConvNet...\n'
         if self._network_type == self.SIMPLE:
             net = self.convnet.simple_convnet(self._input_channels)
-        elif self._network_type == self.FUSING:
+        elif self._network_type == self.CONV_FUSING:
             net = self.convnet.fused_convnets(self._fusion_level,
                                               self._fusion_type)
         lw = LoadWeights(weights_dir, net)
