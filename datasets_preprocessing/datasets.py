@@ -215,7 +215,7 @@ class MSRA_Dataset(Dataset):
         dset[group]["path"][index] = path
         dset[group]["subject"][index] = subject
 
-    def load_data(self):
+    def convert_to_hdf5(self):
         """
         Walks into directories, reads depth images and joints
         and after centering and normalizing both images and joints, saving them in hdf5.
@@ -318,7 +318,7 @@ class ICVL_Dataset(Dataset):
 
         return dataset_size
 
-    def load_data(self):
+    def convert_to_hdf5(self):
 
         if (not os.path.exists(self.save_dir)):
             os.makedirs(self.save_dir)
@@ -455,7 +455,7 @@ class NYU_Dataset(Dataset):
 
         return depth
 
-    def load_data(self):
+    def convert_to_hdf5(self):
 
 
         if (not os.path.exists(self.save_dir)):

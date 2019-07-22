@@ -3,7 +3,17 @@
 This is an implementation of the paper [On the Fusion of RGB and Depth Information for Hand Pose Estimation](https://ieeexplore.ieee.org/document/8451022). The code is written in python
 using the [Lasagne](https://lasagne.readthedocs.io/en/latest/) DL framework.
 
+## Requirements
 
+* CUDA 9.0
+* Create a conda environment from the environment.yml file using the following command in terminal:
+  `$ conda env create -f environment.yml`
+* In your home directory, create a `.theanorc` file containing:
+  ```
+  [global]
+  floatX = float32
+  device = cuda0
+  ```
 ## Dataset
 
 Download the [NYU dataset](https://cims.nyu.edu/~tompson/NYU_Hand_Pose_Dataset.htm#download) and unzip it.
@@ -13,7 +23,7 @@ the dataset in HDF5 format run the following code in your terminal:
 ```python
 from datasets_preprocessing.datasets import NYU_Dataset
 nyu = NYU_Dataset('/path/NYU/dataset', '/path/NYU/hdf5')
-nyu.load_data()
+nyu.convert_to_hdf5()
 
 ```
 where */path/NYU/* should be replaced with the location of the unziped file from above. In ```datasets_preprocessing.datasets```, there are also classes for converting to HDF5 the [ICVL]() and [MSRA]() datasets. Only NYU contains RGB-D images, while 

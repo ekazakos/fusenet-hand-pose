@@ -2,3 +2,4 @@
 *.err*
 *.o*
 .DS_Store
+/train_test_splits/

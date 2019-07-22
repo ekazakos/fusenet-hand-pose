@@ -1,0 +1,50 @@
+name: fusenet
+channels:
+  - defaults
+dependencies:
+  - binutils_impl_linux-64=2.31.1=h6176602_1
+  - binutils_linux-64=2.31.1=h6176602_6
+  - blas=1.0=mkl
+  - ca-certificates=2019.1.23=0
+  - certifi=2019.3.9=py27_0
+  - gcc_impl_linux-64=7.3.0=habb00fd_1
+  - gcc_linux-64=7.3.0=h553295d_6
+  - gxx_impl_linux-64=7.3.0=hdf63c60_1
+  - gxx_linux-64=7.3.0=h553295d_6
+  - h5py=2.9.0=py27h7918eee_0
+  - hdf5=1.10.4=hb1b8bf9_0
+  - intel-openmp=2019.3=199
+  - libedit=3.1.20181209=hc058e9b_0
+  - libffi=3.2.1=hd88cf55_4
+  - libgcc-ng=8.2.0=hdf63c60_1
+  - libgfortran-ng=7.3.0=hdf63c60_0
+  - libgpuarray=0.7.6=h14c3975_0
+  - libstdcxx-ng=8.2.0=hdf63c60_1
+  - linecache2=1.0.0=py27_0
+  - markupsafe=1.1.1=py27h7b6447c_0
+  - mkl=2017.0.4=h4c4d0af_0
+  - mkl-service=1.1.2=py27_3
+  - mkl_fft=1.0.10=py27ha843d7b_0
+  - ncurses=6.1=he6710b0_1
+  - numpy=1.12.0=py27_0
+  - openssl=1.1.1b=h7b6447c_1
+  - pip=19.0.3=py27_0
+  - pygpu=0.7.6=py27h3010b51_0
+  - python=2.7.16=h9bab390_0
+  - readline=7.0=h7b6447c_5
+  - scikit-learn=0.20.3=py27hd81dba3_0
+  - scipy=0.14.0=np19py27_0
+  - setuptools=40.8.0=py27_0
+  - six=1.12.0=py27_0
+  - sqlite=3.27.2=h7b6447c_0
+  - theano=1.0.3=py27hfd86e86_0
+  - tk=8.6.8=hbc83047_0
+  - traceback2=1.4.0=py27_0
+  - unittest2=1.1.0=py27_0
+  - wheel=0.33.1=py27_0
+  - zlib=1.2.11=h7b6447c_3
+  - pip:
+    - lasagne==0.1
+    - mako==1.0.7
+prefix: /jmain01/home/JAD026/dxd01/wwp62-dxd01/home-shared/miniconda3/envs/fusenet
+
